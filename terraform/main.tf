@@ -1,27 +1,14 @@
+terraform{
+  required_version = ">=0.12.24"
 
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      Version = "~>3.27"
-    }
+  backend "s3" {
+    bucket ="digitalis-aws-exercise"
+    key = "digitalisexercise.tfstate"
+    region ="us-east-1"
   }
-
-  required_version = ">=0.14.9"
-
-}
-
-provider "aws" {
+  provider "aws" {
   version = "~>3.0"
   region  = "east-us-1"
 }
 
-
-required_version = ">=0.14.9" 
-
-   backend "s3" {
-       bucket = "s3://digitalis-aws-exercise/aws-exercise-digitalis/"
-       key    = ""
-       region = "east-us-1"
-   }
 }
