@@ -29,7 +29,12 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: |
+          cd infrasetup
+          terraform init -backend-config="region=${{ secrets.AWS_REGION }}" \
+             -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+             -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+             -input=false -no-color
       
       - name: Terraform Plan
         id: plan
