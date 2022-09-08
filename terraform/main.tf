@@ -15,3 +15,13 @@ provider "aws" {
   version = "~>3.0"
   region  = "east-us-1"
 }
+
+
+required_version = ">=0.14.9" 
+
+   backend "s3" {
+       bucket = "s3://digitalis-aws-exercise/aws-exercise-digitalis/"
+       key    = ""
+       region = "east-us-1"
+   }
+}
