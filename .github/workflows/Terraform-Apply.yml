@@ -19,7 +19,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       AWS_REGION: 'us-east-1'
-
+      AWS_AVAILABILITY_ZONE: 'us-east-1a'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,6 +31,7 @@ jobs:
         id: init
         run: |
           terraform init -backend-config="region=${{ secrets.AWS_REGION }}" \
+             -terraform init -backend-config="region=${{ secrets.AWS_AVAILABILITY_ZONE }}" \
              -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
              -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
              -input=false -no-color
