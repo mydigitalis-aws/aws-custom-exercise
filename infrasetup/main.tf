@@ -15,3 +15,26 @@
 
 }*/
 
+ terraform {
+   backend "s3" {
+     bucket = "digitalis-exercise-terraform-state"
+     #key    = "digitalis-infrastructure"
+     key    = "global/s3/digitalis-infrastructure.tfstate"
+     region = "${var.AWS_REGION}"
+   }
+ }
+
+resource "aws_s3_bucket" "terraform_state" {
+  bucket = "digitalis-exercise-terraform-state"
+
+  versioning {
+    enabled = true
+  }
+  
+server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+}

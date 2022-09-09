@@ -6,13 +6,15 @@
     }
   }
 }
-
+*/
 # Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
+  version = "~>4.0"
 }
-*/
 
+
+/*
 provider "aws" {
     region = "${var.AWS_REGION}"
     backend "s3" {
@@ -21,4 +23,5 @@ provider "aws" {
     region ="us-east-1"
   }
 }
+*/
 
