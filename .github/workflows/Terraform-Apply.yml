@@ -7,21 +7,26 @@ on:
   push:
     branches: 
       - main 
-
+defaults:
+  shell: bash
+  working-directory: infrasetup
 jobs:
   terraform:
-    name: "terraform"
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-       working-directory: infrasetup
+    name:    ${{matrix.runner}} - {{matrix.environment}}
+    runs-on:  [  '{{matrix.runner}}']
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: dev1
+            runner: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      AWS_REGION: 'us-east-1'
-      AWS_AVAILABILITY_ZONE: 'us-east-1a'
+      AWS_REGION: ${{secrets.AWS_REGION}}
+      AWS_AVAILABILITY_ZONE: ${{secrets.AWS_AVAILABILITY_ZONE}}'
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: HashiCorp - Setup Terraform
@@ -29,12 +34,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: |
-          terraform init -backend-config="region=${{ secrets.AWS_REGION }}" \
-             -terraform init -backend-config="region=${{ secrets.AWS_AVAILABILITY_ZONE }}" \
-             -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
-             -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
-             -input=false -no-color
+        run: terraform init
       
       - name: Terraform Plan
         id: plan
