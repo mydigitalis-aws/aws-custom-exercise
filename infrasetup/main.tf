@@ -37,4 +37,5 @@ server_side_encryption_configuration {
         sse_algorithm = "AES256"
       }
     }
+  }
 }
