@@ -5,7 +5,7 @@ variable "AWS_REGION" {
 }
 
 variable "AWS_AVAILABILITY_ZONE" {
-  type    = list(string)
+  type    = string
   #default = "us-east-1a"
   #default = "eu-central-1a"
 }

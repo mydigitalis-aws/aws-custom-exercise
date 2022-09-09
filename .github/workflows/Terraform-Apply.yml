@@ -35,11 +35,8 @@ jobs:
 
       - name: Terraform Init
         id: init
-        with:
-          tf_actions_comment: true
-          args: '-var-file="dev.auto.tfvars"'
-          tf_actions_subcommand: 'init'
-      
+        run: terraform init -var-file='dev.tfvars' -input=false 
+
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'push'
