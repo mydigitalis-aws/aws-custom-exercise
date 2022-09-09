@@ -20,7 +20,8 @@
      bucket = "digitalis-exercise-terraform-state"
      #key    = "digitalis-infrastructure"
      key    = "global/s3/digitalis-infrastructure.tfstate"
-     region = "${var.AWS_REGION}"
+     #region = "${var.AWS_REGION}"
+    region = "us-east-1"
    }
  }
 
