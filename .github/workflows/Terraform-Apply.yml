@@ -8,8 +8,9 @@ on:
     branches: 
       - main 
 defaults:
-  shell: bash
-  working-directory: infrasetup
+  run:
+   shell: bash
+   working-directory: infrasetup
 jobs:
   terraform:
     name:    ${{matrix.runner}} - {{matrix.environment}}
