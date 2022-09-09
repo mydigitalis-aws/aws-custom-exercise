@@ -38,7 +38,7 @@ jobs:
         with:
           tf_actions_comment: true
           args: '-var-file="dev.auto.tfvars"'
-        run: terraform init -input=false
+          run: terraform init -input=false
       
       - name: Terraform Plan
         id: plan
